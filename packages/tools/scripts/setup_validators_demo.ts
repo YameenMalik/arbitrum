@@ -8,7 +8,10 @@ import { setupValidatorStates } from './setup_validators'
 import * as addresses from '../../arb-bridge-eth/bridge_eth_addresses.json'
 import { execSync } from 'child_process'
 
-const provider = new ethers.providers.JsonRpcProvider('http://localhost:7545')
+import { findEnv } from '../find-env';
+require('dotenv').config({ path: findEnv() });
+
+const provider = new ethers.providers.JsonRpcProvider(process.env['NETWORK_LOCAL'])
 
 const wallet = provider.getSigner(0)
 const root = '../../'
@@ -110,7 +113,7 @@ async function setupValidators(
     validator_utils_address: addresses['contracts']['ValidatorUtils'].address,
     validator_wallet_factory_address:
       addresses['contracts']['ValidatorWalletCreator'].address,
-    eth_url: 'http://localhost:7545',
+    eth_url: process.env['NETWORK_LOCAL'],
     password: 'pass',
     blocktime: blocktime,
   }
