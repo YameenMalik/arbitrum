@@ -1,8 +1,7 @@
 import { task } from 'hardhat/config'
 import 'dotenv/config'
 import { findEnv } from './find-env';
-dotenv.config({ path: findEnv() });
-console.log('network:', process.env.NETWORK_LOCAL);
+require('dotenv').config({ path: findEnv() });
 
 import * as fs from 'fs'
 
