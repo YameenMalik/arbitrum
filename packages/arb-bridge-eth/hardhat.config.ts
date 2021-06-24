@@ -1,5 +1,9 @@
 import { task } from 'hardhat/config'
 import 'dotenv/config'
+import { findEnv } from './find-env';
+dotenv.config({ path: findEnv() });
+console.log('network:', process.env.NETWORK_LOCAL);
+
 import * as fs from 'fs'
 
 import 'hardhat-deploy'
@@ -129,7 +133,7 @@ const config = {
       // },
     },
     local_development: {
-      url: 'http://127.0.0.1:7545',
+      url: process.env['NETWORK_LOCAL'],
     },
     kovan: {
       url: 'https://kovan.infura.io/v3/' + process.env['INFURA_KEY'],
