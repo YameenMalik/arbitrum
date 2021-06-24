@@ -10,6 +10,7 @@
     "arbos:upgrade": "ts-node ./scripts/update-arbos.ts init"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "find-up": "^5.0.0"
   },
   "devDependencies": {

@@ -1,3 +1,7 @@
+import 'dotenv/config'
+import { findEnv } from '../find-env';
+require('dotenv').config({ path: findEnv() });
+
 import * as ethers from 'ethers'
 import { EventFragment } from '@ethersproject/abi'
 import { L1Bridge, RollupCreator__factory, Inbox__factory } from 'arb-ts'
@@ -8,10 +12,8 @@ import { setupValidatorStates } from './setup_validators'
 import * as addresses from '../../arb-bridge-eth/bridge_eth_addresses.json'
 import { execSync } from 'child_process'
 
-import { findEnv } from '../find-env';
-require('dotenv').config({ path: findEnv() });
-
-const provider = new ethers.providers.JsonRpcProvider(process.env['NETWORK_LOCAL'])
+const network_url = process.env['NETWORK_LOCAL'] || '';
+const provider = new ethers.providers.JsonRpcProvider(network_url)
 
 const wallet = provider.getSigner(0)
 const root = '../../'
@@ -113,7 +115,7 @@ async function setupValidators(
     validator_utils_address: addresses['contracts']['ValidatorUtils'].address,
     validator_wallet_factory_address:
       addresses['contracts']['ValidatorWalletCreator'].address,
-    eth_url: process.env['NETWORK_LOCAL'],
+    eth_url: network_url,
     password: 'pass',
     blocktime: blocktime,
   }
@@ -133,28 +135,30 @@ async function setupValidators(
   await initializeClientWallets(inboxAddress)
 }
 
-if (require.main === module) {
-  yargs.command(
-    'init [rollup] [ethurl]',
-    'initialize validators for the given rollup chain',
-    yargsBuilder =>
-      yargsBuilder.options({
-        force: {
-          description: 'clear any existing state',
-          type: 'boolean',
-          default: false,
-        },
-        validatorcount: {
-          description: 'number of validators to deploy',
-          default: 1,
-        },
-        blocktime: {
-          description: 'expected length of time between blocks',
-          default: 2,
-        },
-      }),
-    args => {
-      setupValidators(args.validatorcount + 1, args.blocktime, args.force)
-    }
-  ).argv
+if (require.main === module){
+
+yargs.command(
+  'init [rollup] [ethurl]',
+  'initialize validators for the given rollup chain',
+  yargsBuilder =>
+    yargsBuilder.options({
+      force: {
+        description: 'clear any existing state',
+        type: 'boolean',
+        default: false,
+      },
+      validatorcount: {
+        description: 'number of validators to deploy',
+        default: 1,
+      },
+      blocktime: {
+        description: 'expected length of time between blocks',
+        default: 2,
+      },
+    }),
+  args => {
+    setupValidators(args.validatorcount + 1, args.blocktime, args.force)
+  }
+).argv
+
 }
