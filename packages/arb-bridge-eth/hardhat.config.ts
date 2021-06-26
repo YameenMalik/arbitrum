@@ -18,8 +18,6 @@ const verifyTask = require('./scripts/verifyTask') // eslint-disable-line @types
 const setupVerifyTask = verifyTask.default
 setupVerifyTask()
 
-if (!process.env['DEVNET_PRIVKEY']) console.warn('No devnet privkey set')
-
 task('accounts', 'Prints the list of accounts', async (taskArgs, bre) => {
   const accounts = await bre.ethers.getSigners()
 
@@ -133,38 +131,7 @@ const config = {
     },
     local_development: {
       url: process.env['NETWORK_LOCAL'],
-    },
-    kovan: {
-      url: 'https://kovan.infura.io/v3/' + process.env['INFURA_KEY'],
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
-    arbkovan4: {
-      gasPrice: 0,
-      url: 'https://kovan4.arbitrum.io/rpc',
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
-    kovan5: {
-      gasPrice: 0,
-      url: 'https://kovan5.arbitrum.io/rpc',
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
-    devnet: {
-      url: 'https://devnet.arbitrum.io/rpc',
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
-    devnetL2: {
-      url: 'https://devnet-l2.arbitrum.io/rpc',
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
+      accounts: [process.env['PRIVATE_KEY']]
     },
     arbitrum: {
       url: 'http://127.0.0.1:8547',
