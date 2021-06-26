@@ -60,7 +60,8 @@ task('create-chain', 'Creates a rollup chain')
     console.log(ev)
 
     // const path = `rollup-${hre.network.name}.json`
-    const path = `rollup-${hre.network.name}.json`
+    const path = `rollup-${process.env['DEPLOY_ON'] || 'hardhat' }.json`
+    console.log("Path:", path);
     const output = JSON.stringify({
       rollupAddress: ev.args[0],
       inboxAddress: ev.args[1],

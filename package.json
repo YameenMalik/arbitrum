@@ -13,8 +13,9 @@
   },
   "homepage": "https://offchainlabs.com/",
   "scripts": {
-    "demo:initialize": "yarn workspace tools demo:initialize",
-    "demo:deploy": "./scripts/arb_deploy.py local",
+    "rollup:initialize": "yarn workspace tools rollup:initialize",
+    "rollup:deploy:local": "./scripts/arb_deploy.py local",
+    "rollup:deploy:rinkeby": "./scripts/arb_deploy.py rinkeby",
     "prod:initialize": "yarn workspace tools prod:initialize",
     "deploy:validators": "./scripts/arb_deploy.py",
     "deploy:eth_bridge": "yarn workspace arb-bridge-eth deploy:contracts"

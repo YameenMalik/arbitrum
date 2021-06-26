@@ -126,11 +126,7 @@ def deploy(sudo_flag, build_flag, up_flag, rollup, password):
             validator_utils_address = data["validator_utils_address"]
             validator_wallet_factory_address = data["validator_wallet_factory_address"]
             extra_flags = ""
-            eth_url = (
-                data["eth_url"]
-                .replace("localhost", "arb-bridge-eth-geth")
-                .replace("localhost", "arb-bridge-eth-geth")
-            )
+            eth_url = data["eth_url"]
 
             if not password and "password" in data:
                 extra_flags += " --password=" + data["password"]
@@ -140,6 +136,7 @@ def deploy(sudo_flag, build_flag, up_flag, rollup, password):
                 raise Exception(
                     "arb_deploy requires validator password through [--password=pass] parameter or in config.json file"
                 )
+
         if i == 0:
             contents = compose_header(
                 states_path % 0, extra_flags, eth_url, rollup_address
@@ -227,13 +224,16 @@ def main():
         dest="sudo",
         help="Run docker-compose with sudo",
     )
+    
     group = parser.add_mutually_exclusive_group()
+
     group.add_argument(
         "--build",
         action="store_true",
         dest="build",
         help="Run docker-compose build only",
     )
+
     group.add_argument(
         "--up", action="store_true", dest="up", help="Run docker-compose up only"
     )

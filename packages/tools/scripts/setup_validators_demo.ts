@@ -3,6 +3,7 @@ import { findEnv } from '../find-env';
 require('dotenv').config({ path: findEnv() });
 
 import * as ethers from 'ethers'
+
 import { EventFragment } from '@ethersproject/abi'
 import { L1Bridge, RollupCreator__factory, Inbox__factory } from 'arb-ts'
 import * as yargs from 'yargs'
@@ -12,11 +13,16 @@ import { setupValidatorStates } from './setup_validators'
 import * as addresses from '../../arb-bridge-eth/bridge_eth_addresses.json'
 import { execSync } from 'child_process'
 
-const network = process.env['DEPLOY_ON']
-const network_url = process.env['NETWORK_' + network.toUpperCase()] || '';
-const provider = new ethers.providers.JsonRpcProvider(network_url)
+const network:string = process.env['DEPLOY_ON'] || '';
+const network_url:string = process.env[network.toUpperCase() + "_NETWORK"] || '';
+const pvtKey = process.env[network.toUpperCase() + "_PRIVATE_KEY"] || '';
+console.log("Network:", network)
+console.log("Network Url:", network_url)
+console.log("Private Key:", pvtKey);
 
-const wallet = provider.getSigner(0)
+const provider = new ethers.providers.JsonRpcProvider(network_url)
+const wallet = new ethers.Wallet(pvtKey, provider);
+
 const root = '../../'
 const rollupsPath = root + 'rollups/'
 
@@ -48,11 +54,14 @@ async function initializeWallets(count: number): Promise<ethers.Wallet[]> {
   const waits = []
   for (let i = 0; i < count; i++) {
     const newWallet = ethers.Wallet.createRandom()
+    console.log("New wallet address: ", newWallet.address);
     const tx = {
       to: newWallet.address,
-      value: ethers.utils.parseEther('5.0'),
-    }
+      value: ethers.utils.parseEther('1'),
+    }    
+
     const send = await wallet.sendTransaction(tx)
+  
     wallets.push(newWallet)
     waits.push(send.wait())
   }
@@ -64,13 +73,10 @@ async function initializeClientWallets(inboxAddress: string): Promise<void> {
   const addresses = [
     '0xc7711f36b2C13E00821fFD9EC54B04A60AEfbd1b',
     '0x38299D74a169e68df4Da85Fb12c6Fd22246aDD9F',
-    '0xAf40F7D235A9786a420bb89B188910958fD7EF93',
-    '0xFcC598b3E3575CA937AF7F0E804a8BAb5E92a3f6',
-    '0x755449b9901f91deC52DB39AF8c655206C63eD8e',
   ]
-
+  
   const inbox = Inbox__factory.connect(inboxAddress, wallet)
-  const amount = ethers.utils.parseEther('100')
+  const amount = ethers.utils.parseEther('1')
 
   for (const address of addresses) {
     await inbox.depositEth(address, { value: amount })
@@ -80,15 +86,17 @@ async function initializeClientWallets(inboxAddress: string): Promise<void> {
 async function setupValidators(
   count: number,
   blocktime: number,
+  createClientWallets: boolean,
   force: boolean
 ): Promise<void> {
-  const wallets = await initializeWallets(count)
+  const wallets = await initializeWallets(count);
+
   const { rollupAddress, inboxAddress } = await setupRollup(
     await wallets[0].getAddress()
   )
   console.log('Created rollup', rollupAddress)
 
-  const validatorsPath = rollupsPath + 'local/'
+  const validatorsPath = rollupsPath + `${network}/`
 
   if (count < 2) {
     throw Error('must create at least 1 validator')
@@ -119,7 +127,7 @@ async function setupValidators(
     blocktime: blocktime,
   }
 
-  await setupValidatorStates(count, 'local', config)
+  await setupValidatorStates(count, network, config)
 
   let i = 0
   for (const wallet of wallets) {
@@ -131,7 +139,10 @@ async function setupValidators(
     i++
   }
 
-  await initializeClientWallets(inboxAddress)
+  if (createClientWallets) {
+    await initializeClientWallets(inboxAddress)
+  }
+  
 }
 
 if (require.main === module){
@@ -154,9 +165,13 @@ yargs.command(
         description: 'expected length of time between blocks',
         default: 2,
       },
+      createClientWallets: {
+        description: 'creates wallets on L2 and fills them with eth to be used by clients',
+        default: false,
+      }
     }),
   args => {
-    setupValidators(args.validatorcount + 1, args.blocktime, args.force)
+    setupValidators(args.validatorcount + 1, args.blocktime, args.createClientWallets, args.force)
   }
 ).argv
 

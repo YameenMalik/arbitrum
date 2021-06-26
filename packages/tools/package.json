@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "demo:initialize": "ts-node ./scripts/setup_validators_demo.ts init",
+    "rollup:initialize": "ts-node ./scripts/setup_validators_demo.ts init",
     "prod:initialize": "ts-node ./scripts/setup_validators.ts init",
     "arbos:upgrade": "ts-node ./scripts/update-arbos.ts init"
   },
