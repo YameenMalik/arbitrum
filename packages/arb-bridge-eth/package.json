@@ -19,7 +19,7 @@
   "scripts": {
     "build": "hardhat compile",
     "test": "hardhat test",
-    "deploy:contracts": "hardhat deploy --network local --export bridge_eth_addresses.json"
+    "deploy:contracts": "hardhat deploy --export bridge_eth_addresses.json"
   },
   "dependencies": {
     "@openzeppelin/contracts": "3.4.0",

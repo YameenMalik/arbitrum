@@ -87,7 +87,7 @@ task('deposit', 'Deposit coins into ethbridge')
   })
 
 const config = {
-  defaultNetwork: 'hardhat',
+  defaultNetwork: process.env['DEPLOY_ON'] || 'hardhat',
   paths: {
     artifacts: 'build/contracts',
   },
