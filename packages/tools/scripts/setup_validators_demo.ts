@@ -12,7 +12,8 @@ import { setupValidatorStates } from './setup_validators'
 import * as addresses from '../../arb-bridge-eth/bridge_eth_addresses.json'
 import { execSync } from 'child_process'
 
-const network_url = process.env['NETWORK_LOCAL'] || '';
+const network = process.env['DEPLOY_ON']
+const network_url = process.env['NETWORK_' + network.toUpperCase()] || '';
 const provider = new ethers.providers.JsonRpcProvider(network_url)
 
 const wallet = provider.getSigner(0)
@@ -27,8 +28,6 @@ export interface RollupCreatedEvent {
 async function setupRollup(
   sequencerAddress: string
 ): Promise<RollupCreatedEvent> {
-  // TODO: is the L2 sequencer the 1st unlocked account in the L1 node?
-  const network = 'local_development'
 
   execSync(
     `yarn workspace arb-bridge-eth hardhat create-chain --sequencer ${sequencerAddress} --network ${network}`

@@ -129,10 +129,14 @@ const config = {
       //   interval: 1000,
       // },
     },
-    local_development: {
-      url: process.env['NETWORK_LOCAL'],
-      accounts: [process.env['PRIVATE_KEY']]
+    local: {
+      url: process.env['LOCAL_NETWORK'],
+      accounts: [process.env['LOCAL_PRIVATE_KEY']]
     },
+    rinkeby: {
+      url: process.env['RINKEBY_NETWORK'],
+      accounts: [process.env['RINKEBY_PRIVATE_KEY']]
+    },    
     arbitrum: {
       url: 'http://127.0.0.1:8547',
       // url: 'https://kovan3.arbitrum.io/rpc',
@@ -164,30 +168,12 @@ const config = {
   },
 }
 
-if (process.env['RINKEBY_URL'] && process.env['RINKEBY_MNEMONIC']) {
+if (process.env['DEPLOY_ON'] == 'rinkeby') {
   ;(config.networks as any)['rinkeby'] = {
-    url: process.env['RINKEBY_URL'] || '',
-    accounts: [process.env['RINKEBY_MNEMONIC'] || ''],
+    url: process.env['RINKEBY_NETWORK'] || '',
+    accounts: [process.env['RINKEBY_PRIVATE_KEY'] || ''],
     network_id: 4,
     confirmations: 1,
-  }
-}
-
-if (process.env['ROPSTEN_URL'] && process.env['ROPSTEN_MNEMONIC']) {
-  ;(config.networks as any)['ropsten'] = {
-    url: process.env['ROPSTEN_URL'] || '',
-    accounts: [process.env['ROPSTEN_MNEMONIC'] || ''],
-    network_id: 3,
-    confirmations: 1,
-  }
-}
-
-if (process.env['KOVAN_URL'] && process.env['KOVAN_MNEMONIC']) {
-  ;(config.networks as any)['kovan'] = {
-    url: process.env['KOVAN_URL'] || '',
-    accounts: [process.env['KOVAN_MNEMONIC'] || ''],
-    network_id: 42,
-    confirmations: 4,
   }
 }
 
