@@ -96,7 +96,7 @@ func startup() error {
 	walletcount := fs.Int("walletcount", 10, "number of wallets to fund")
 	walletbalance := fs.Int64("walletbalance", 100, "amount of funds in each wallet (Eth)")
 	arbosPath := fs.String("arbos", "", "ArbOS version")
-	enableFees := fs.Bool("with-fees", false, "Run arbos with fees on")
+	enableFees := fs.Bool("with-fees", true, "Run arbos with fees on")
 	dbDir := fs.String("dbdir", "", "directory to load dev node on. Use tempory if empty")
 	aggStr := fs.String("aggregator", "", "aggregator to use as the sender from this node")
 	initialL1Height := fs.Uint64("l1height", 0, "initial l1 height")
