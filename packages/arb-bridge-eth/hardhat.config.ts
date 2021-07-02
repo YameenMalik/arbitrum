@@ -84,7 +84,7 @@ task('deposit', 'Deposit coins into ethbridge')
     const wallet = new ethers.Wallet(privkey, ethers.provider)
     const GlobalInbox = await ethers.getContractFactory('Inbox')
     const inbox = GlobalInbox.attach(inboxAddress).connect(wallet)
-    await inbox.depositEth(dest, { value: amount })
+    await inbox.depositEth(dest, { value: amount, gasLimit: '200000' })
   })
 
 const config = {
