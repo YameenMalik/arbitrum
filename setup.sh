@@ -37,8 +37,6 @@ ctrl + a + d # get out of screen
 
 yarn enable:fee
 
-cd pacakges/arb-bridge-eth
-npx hardhat deposit 0x3ff177D812534deE562738841DD1CdcE38c86F2C 7540d48032c731b3a17947b63a04763492d84aef854246d355a703adc9b54ce9 0x931d6514C8d5522C7489aad7aCCFfC20E6A92E57 1000000000000000000 
 
 
 
