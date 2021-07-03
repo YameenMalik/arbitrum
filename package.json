@@ -17,7 +17,8 @@
     "rollup:deploy:local": "./scripts/arb_deploy.py local",
     "rollup:deploy:rinkeby": "./scripts/arb_deploy.py rinkeby",
     "deploy:eth_bridge": "yarn workspace arb-bridge-eth deploy:contracts",
-    "enable:fee": "yarn workspace tools enable:fee"
+    "enable:fee": "yarn workspace tools enable:fee",
+    "fundL2Wallet": "yarn workspace tools fundL2Wallet"
   },
   "engines": {
     "node": ">= 8.0.0 < 16.0.0",
