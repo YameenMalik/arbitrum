@@ -11,7 +11,26 @@ arbitrum_arb-validator1_1 exited with code 0
 ```
 Kindly stop the dockers and redeploy with `--up` flag like this: `yarn rollup:deploy:rinkeby --up` 
 
-- Navigate to arb-bridge-eth package and deposit money to accounts on Arbitrum using `deposit` task of hardhat:
+- You can transfer funds from L1 to L2 using funding script: `yarn fundL2Wallet` which accepts the following params:
+
+```
+Options:
+  --help         Show help                                             [boolean]
+  --version      Show version number                                   [boolean]
+  --wallet, -w   wallet address of the account to be funded on L2
+                                                             [string] [required]
+  --amount, -a   amount to be funded                         [string] [required]
+  --inbox, -i    inbox contract address on L1                [string] [required]
+  --faucet, -f   private key of the faucet account on L1 (if not provided will
+                 be read from .env)                          [string] [required]
+  --network, -n  url of L1 network                           [string] [required]
+
+e.g:
+ yarn fundL2Wallet -w 0x8f42300a0Ba2883312347Cb1a748207453F735aC -a 1 -i 0x89F7e32e47A123e1e7E0ba86DFd0f1cCa578Af11 -f 7540d48032c731b3a17947b63a04763492d84aef854246d355a703adc9b54ce9 -n http://3.93.36.125:5348
+```
+
+
+- Alternatively fund transfers can be done using hardhat task specified in arb-bridge-eth package to deposit money to accounts on Arbitrum:
 ```
 Usage: hardhat [GLOBAL OPTIONS] deposit inboxAddress privkey dest amount
 
