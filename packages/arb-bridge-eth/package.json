@@ -19,17 +19,21 @@
   "scripts": {
     "build": "hardhat compile",
     "test": "hardhat test",
-    "deploy:contracts": "hardhat deploy --export bridge_eth_addresses.json"
+    "deploy:contracts": "hardhat deploy --export bridge_eth_addresses.json",
+    "deploy:contracts:bodhi": "ts-node scripts/deploy.ts"
   },
   "dependencies": {
+    "@acala-network/bodhi": "^1.0.0",
     "@openzeppelin/contracts": "3.4.0",
     "@openzeppelin/contracts-upgradeable": "3.4.0",
+    "@polkadot/api": "^4.17.1",
+    "@polkadot/keyring": "^6.11.1",
     "@types/node": "^14.0.13",
     "dotenv": "^8.2.0",
-    "find-up": "^5.0.0",
     "ethers": "^5.0.24",
+    "find-up": "^5.0.0",
     "hardhat-deploy": "^0.7.0-beta.40",
-    "ts-node": "^9.0.0",
+    "ts-node": "^10.0.0",
     "typescript": "^4.0.2"
   },
   "devDependencies": {
