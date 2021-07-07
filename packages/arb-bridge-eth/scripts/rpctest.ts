@@ -1,8 +1,10 @@
 const ethers = require('ethers');
 
-const providerURL = 'http://3.227.232.123:9933';
+const url = process.argv[2];
+console.log("url:", url);
+
 // Define Provider
-const provider = new ethers.providers.StaticJsonRpcProvider(providerURL, {
+const provider = new ethers.providers.StaticJsonRpcProvider(url, {
     chainId: 1287,
     name: 'moonbase-alphanet'
 });
