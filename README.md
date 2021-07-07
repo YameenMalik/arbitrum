@@ -11,7 +11,7 @@ yarn build
 - Kindly look at .env_example to create a proper .env 
 - Deploy arb-eth-bridge contracts on any evm supported L1 chain using: `yarn deploy:eth_bridge`. Provide `DEPLOY_ON` flag in env for the chain to deploy on.
 - Build validator nodes and arbitrum config using: `yarn rollup:initialize`
-- Get validator nodes running for arb chain by: `yarn rollup:deploy:moonbase` or `yarn rollup:deploy:rinkeby`. When deploying the first time it will first build and then up the validator and aggregator nodes. You might be greeted with this error: 
+- Get validator nodes running for arb chain by: `yarn rollup:deploy`. When deploying the first time it will first build and then up the validator and aggregator nodes. You might be greeted with this error: 
 ```
 arb-validator1_1  | {"level":"error","component":"arb-validator","stack":[{"func":"startup","line":"265","source":"arb-validator.go"},{"func":"main","line":"99","source":"arb-validator.go"},{"func":"main","line":"204","source":"proc.go"},{"func":"goexit","line":"1374","source":"asm_amd64.s"}],"error":"error checking initial chain state: Post \"http://3.93.36.125:5348/\": EOF","time":"2021-07-02T17:44:50Z","caller":"/home/user/arb-node-core/cmd/arb-validator/arb-validator.go:100","message":"Error running validator"}
 arbitrum_arb-validator1_1 exited with code 0
