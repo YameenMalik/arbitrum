@@ -137,7 +137,12 @@ const config = {
     rinkeby: {
       url: process.env['RINKEBY_NETWORK'],
       accounts: [process.env['RINKEBY_PRIVATE_KEY']]
-    },    
+    }, 
+    moonbase: {
+      url: process.env['MOONBASE_NETWORK'],
+      accounts: [process.env['MOONBASE_PRIVATE_KEY']],
+      chainId: 1287
+    },      
     arbitrum: {
       url: 'http://127.0.0.1:8547',
       // url: 'https://kovan3.arbitrum.io/rpc',

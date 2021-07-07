@@ -16,7 +16,9 @@
     "rollup:initialize": "yarn workspace tools rollup:initialize",
     "rollup:deploy:local": "./scripts/arb_deploy.py local",
     "rollup:deploy:rinkeby": "./scripts/arb_deploy.py rinkeby",
+    "rollup:deploy:moonbase": "./scripts/arb_deploy.py moonbase",
     "deploy:eth_bridge": "yarn workspace arb-bridge-eth deploy:contracts",
+    "deploy:eth_bridge:bodhi": "yarn workspace arb-bridge-eth deploy:contracts:bodhi",
     "enable:fee": "yarn workspace tools enable:fee",
     "fundL2Wallet": "yarn workspace tools fundL2Wallet"
   },
