@@ -141,7 +141,8 @@ const config = {
     moonbase: {
       url: process.env['MOONBASE_NETWORK'],
       accounts: [process.env['MOONBASE_PRIVATE_KEY']],
-      chainId: 1287
+      chainId: 1287,
+      timeout: 1000000,
     },      
     edgeware: {
       url: process.env['EDGEWARE_NETWORK'],
