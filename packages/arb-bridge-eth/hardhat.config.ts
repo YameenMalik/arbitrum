@@ -143,6 +143,13 @@ const config = {
       accounts: [process.env['MOONBASE_PRIVATE_KEY']],
       chainId: 1287
     },      
+    edgeware: {
+      url: process.env['EDGEWARE_NETWORK'],
+      accounts: [process.env['EDGEWARE_PRIVATE_KEY']],
+      chainId: 2021,
+      gas: 1754718,
+      gasPrice: 43000000000
+    },      
     arbitrum: {
       url: 'http://127.0.0.1:8547',
       // url: 'https://kovan3.arbitrum.io/rpc',
@@ -154,7 +161,7 @@ const config = {
         initialIndex: 0,
         count: 10,
       },
-      timeout: 100000,
+      timeout: 1000000,
     },
   },
   mocha: {
