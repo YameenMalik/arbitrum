@@ -1,5 +1,12 @@
 ### How to? 
-
+Clone the repo and initialize submodules like this:
+```
+git clone -b moonbeam https://github.com/offchainlabs/arbitrum.git
+cd arbitrum
+git submodule update --init --recursive
+yarn
+yarn build
+```
 
 - Kindly look at .env_example to create a proper .env 
 - Deploy arb-eth-bridge contracts on any evm supported L1 chain using: `yarn deploy:eth_bridge`. Provide `DEPLOY_ON` flag in env for the chain to deploy on.
