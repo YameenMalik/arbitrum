@@ -5,7 +5,7 @@ git clone -b moonbeam https://github.com/offchainlabs/arbitrum.git
 cd arbitrum
 git submodule update --init --recursive
 yarn
-yarn build
+pip/pip3 instlal -r requirements-dev.txt
 ```
 
 - Kindly look at .env_example to create a proper .env 
