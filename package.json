@@ -13,7 +13,6 @@
   },
   "homepage": "https://offchainlabs.com/",
   "scripts": {
-    "build": "yarn workspace arb-ts build",
     "deploy:eth_bridge": "yarn workspace arb-bridge-eth deploy:contracts",
     "deploy:eth_bridge:bodhi": "yarn workspace arb-bridge-eth deploy:contracts:bodhi",
     "rollup:initialize": "yarn workspace tools rollup:initialize",
