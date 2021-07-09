@@ -116,7 +116,7 @@ func (c *ChallengeWatcher) ChallengeState(ctx context.Context) (common.Hash, err
 func (c *ChallengeWatcher) LookupBisection(ctx context.Context, challengeState common.Hash) (*core.Bisection, error) {
 	var query = ethereum.FilterQuery{
 		BlockHash: nil,
-		FromBlock: big.NewInt(0),
+		FromBlock: big.NewInt(280_000),
 		ToBlock:   nil,
 		Addresses: []ethcommon.Address{c.address},
 		Topics:    [][]ethcommon.Hash{{bisectedID}, {challengeState.ToEthHash()}},

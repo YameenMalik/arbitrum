@@ -99,7 +99,7 @@ func NewRollupWatcher(address ethcommon.Address, client ethutils.EthClient) (*Ro
 func (r *RollupWatcher) LookupCreation(ctx context.Context) (*ethbridgecontracts.RollupRollupCreated, error) {
 	var query = ethereum.FilterQuery{
 		BlockHash: nil,
-		FromBlock: big.NewInt(0),
+		FromBlock: big.NewInt(280_000),
 		ToBlock:   nil,
 		Addresses: []ethcommon.Address{r.address},
 		Topics:    [][]ethcommon.Hash{{rollupCreatedID}},
@@ -123,7 +123,7 @@ func (r *RollupWatcher) LookupNode(ctx context.Context, number *big.Int) (*core.
 	copy(numberAsHash[:], math.U256Bytes(number))
 	var query = ethereum.FilterQuery{
 		BlockHash: nil,
-		FromBlock: big.NewInt(0),
+		FromBlock: big.NewInt(280_000),
 		ToBlock:   nil,
 		Addresses: []ethcommon.Address{r.address},
 		Topics:    [][]ethcommon.Hash{{nodeCreatedID}, {numberAsHash}},
