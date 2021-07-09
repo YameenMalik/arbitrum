@@ -178,6 +178,7 @@ func startup() error {
 	validatorUtilsAddr := ethcommon.HexToAddress(os.Args[4])
 	validatorWalletFactoryAddr := ethcommon.HexToAddress(os.Args[5])
 	auth, _, err := cmdhelp.GetKeystore(folder, walletFlags, flagSet, l1ChainId)
+	auth.GasLimit = 2000000;
 	if err != nil {
 		return errors.Wrap(err, "error loading wallet keystore")
 	}

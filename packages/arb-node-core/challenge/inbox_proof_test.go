@@ -32,6 +32,7 @@ func TestInboxProof(t *testing.T) {
 	client := &ethutils.SimulatedEthClient{SimulatedBackend: backend}
 
 	auth, err := bind.NewKeyedTransactorWithChainID(pks[0], big.NewInt(1337))
+	auth.GasLimit = 2000000;
 	test.FailIfError(t, err)
 	sequencer := auth.From
 	maxDelayBlocks := big.NewInt(60)

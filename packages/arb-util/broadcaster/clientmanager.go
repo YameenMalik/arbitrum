@@ -62,7 +62,6 @@ func NewClientManager(pool *gopool.Pool, poller netpoll.Poller, settings ClientM
 // Register registers new connection as a Client.
 func (cm *ClientManager) Register(ctx context.Context, conn net.Conn, desc *netpoll.Desc) *ClientConnection {
 	clientConnection := NewClientConnection(conn, desc, cm)
-
 	{
 		cm.mu.Lock()
 

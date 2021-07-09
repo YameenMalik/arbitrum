@@ -123,6 +123,7 @@ func SetupBatcher(
 			return nil, err
 		}
 		feedBroadcaster := broadcaster.NewBroadcaster(broadcasterSettings)
+		batcherMode.Auth.GasLimit = 200000;
 		seqBatcher, err := batcher.NewSequencerBatcher(
 			ctx,
 			batcherMode.Core,
@@ -140,7 +141,6 @@ func SetupBatcher(
 		if err != nil {
 			return nil, err
 		}
-
 		err = feedBroadcaster.Start(ctx)
 		if err != nil {
 			return nil, errors.Wrap(err, "error starting feed broadcaster")
