@@ -37,9 +37,8 @@ task('create-chain', 'Creates a rollup chain')
     const [deployer] = await ethers.getSigners()
     const rollupCreatorDep = await deployments.get('RollupCreator')
     const RollupCreator = await ethers.getContractFactory('RollupCreator')
-    const rollupCreator = RollupCreator.attach(
-      rollupCreatorDep.address
-    ).connect(deployer)
+    const rollupCreator = RollupCreator.attach(rollupCreatorDep.address).connect(deployer)
+
     const tx = await rollupCreator.createRollup(
       machineHash,
       900,
