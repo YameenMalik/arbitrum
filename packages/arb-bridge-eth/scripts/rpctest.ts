@@ -4,15 +4,13 @@ const url = process.argv[2];
 console.log("url:", url);
 
 // Define Provider
-const provider = new ethers.providers.StaticJsonRpcProvider(url, {
-    chainId: 1287,
-    name: 'moonbase-alphanet'
-});
+const provider = new ethers.providers.StaticJsonRpcProvider(url);
 
 async function main(){
+    const address = "0xA15c96A1Ed18B3173C988A098E957776c8Ba74A6";
     console.log("Network:", await provider.getNetwork())
     console.log("BlockNumber:", +await provider.getBlockNumber())
-    console.log("Balance of 0x5fEf3e25c2c1c13A16CEb8b3F4199AbbA21b33D6:", +await provider.getBalance("0x5fEf3e25c2c1c13A16CEb8b3F4199AbbA21b33D6"));
+    console.log(`Balance of ${address}:`, +await provider.getBalance(address));
 }
 
 main();
