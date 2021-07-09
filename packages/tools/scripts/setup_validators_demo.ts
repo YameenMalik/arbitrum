@@ -35,10 +35,13 @@ async function setupRollup(
   sequencerAddress: string
 ): Promise<RollupCreatedEvent> {
 
-  execSync(
-    `yarn workspace arb-bridge-eth hardhat create-chain --sequencer ${sequencerAddress} --network ${network}`
-  )
-
+  try {
+    execSync(`yarn workspace arb-bridge-eth hardhat create-chain --sequencer ${sequencerAddress} --network ${network}`).toString();
+ } catch (error) {
+    console.log(`Status Code: ${error.status} with '${error.message}'`);
+    process.exit()
+ }
+ 
   const fileName = `rollup-${network}.json`
   const file = fs.readFileSync(`../arb-bridge-eth/${fileName}`).toString()
   const ev = JSON.parse(file)
