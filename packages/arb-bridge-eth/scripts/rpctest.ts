@@ -3,16 +3,16 @@ const ethers = require('ethers');
 const url = process.argv[2];
 console.log("url:", url);
 
+const address = String(process.argv[3]);
+console.log("address:", address);
+
 // Define Provider
 const provider = new ethers.providers.StaticJsonRpcProvider(url);
 
 async function main(){
-    // const address = "0x2574fFC5dB5F01246944e869ac49CBD22F2B614F";
-    // const address = "0xa767415e11ace35175c573b9564344de7576699e";
-    const address = "0x12850f9bfb0338ac1f7106cb0d9113c8ba4dacca";
     console.log("Network:", await provider.getNetwork())
     console.log("BlockNumber:", +await provider.getBlockNumber())
-    console.log(`Balance of ${address}:`, +await provider.getBalance(address));
+    console.log(`Balance:`, +await provider.getBalance(address));
     
 }
 
