@@ -205,7 +205,7 @@ func (r *RollupWatcher) LookupChallengedNode(ctx context.Context, address common
 
 	query := ethereum.FilterQuery{
 		BlockHash: nil,
-		FromBlock: big.NewInt(0),
+		FromBlock: big.NewInt(280_000),
 		ToBlock:   nil,
 		Addresses: []ethcommon.Address{r.address},
 		Topics:    [][]ethcommon.Hash{{challengeCreatedID}, {addressQuery}},
