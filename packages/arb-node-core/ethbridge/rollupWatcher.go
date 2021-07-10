@@ -100,7 +100,7 @@ func (r *RollupWatcher) LookupCreation(ctx context.Context) (*ethbridgecontracts
 	var query = ethereum.FilterQuery{
 		BlockHash: nil,
 		FromBlock: big.NewInt(280_000),
-		ToBlock:   nil,
+		ToBlock:   big.NewInt(295_000),
 		Addresses: []ethcommon.Address{r.address},
 		Topics:    [][]ethcommon.Hash{{rollupCreatedID}},
 	}
@@ -124,7 +124,7 @@ func (r *RollupWatcher) LookupNode(ctx context.Context, number *big.Int) (*core.
 	var query = ethereum.FilterQuery{
 		BlockHash: nil,
 		FromBlock: big.NewInt(280_000),
-		ToBlock:   nil,
+		ToBlock:   big.NewInt(295_000),
 		Addresses: []ethcommon.Address{r.address},
 		Topics:    [][]ethcommon.Hash{{nodeCreatedID}, {numberAsHash}},
 	}
@@ -206,7 +206,7 @@ func (r *RollupWatcher) LookupChallengedNode(ctx context.Context, address common
 	query := ethereum.FilterQuery{
 		BlockHash: nil,
 		FromBlock: big.NewInt(280_000),
-		ToBlock:   nil,
+		ToBlock:   big.NewInt(295_000),
 		Addresses: []ethcommon.Address{r.address},
 		Topics:    [][]ethcommon.Hash{{challengeCreatedID}, {addressQuery}},
 	}
