@@ -116,8 +116,8 @@ func (r *DelayedBridgeWatcher) LookupMessageBlock(ctx context.Context, messageNu
 
 	query := ethereum.FilterQuery{
 		BlockHash: nil,
-		FromBlock: big.NewInt(280_000),
-		ToBlock:   big.NewInt(295_000),
+		FromBlock: big.NewInt(0),
+		ToBlock:   nil,
 		Addresses: []ethcommon.Address{r.address},
 		Topics:    [][]ethcommon.Hash{{messageDeliveredID}, {msgNumBytes}},
 	}
