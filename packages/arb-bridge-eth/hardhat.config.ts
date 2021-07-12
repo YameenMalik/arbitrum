@@ -1,6 +1,8 @@
 import { task } from 'hardhat/config'
-import 'dotenv/config'
 import * as fs from 'fs'
+import { findEnv } from './find-env';
+require('dotenv').config({ path: findEnv() });
+
 
 import 'hardhat-deploy'
 
@@ -104,34 +106,16 @@ const config = {
         accountsBalance: '10000000000000000000000000',
       },
     },
-    local_development: {
-      url: 'http://127.0.0.1:7545',
+    local: {
+      url: process.env['LOCAL_NETWORK'],
+      accounts: [process.env['LOCAL_PRIVATE_KEY']]
     },
-    kovan: {
-      url: 'https://kovan.infura.io/v3/' + process.env['INFURA_KEY'],
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
-    arbkovan4: {
-      gasPrice: 0,
-      url: 'https://kovan4.arbitrum.io/rpc',
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
-    devnet: {
-      url: 'https://devnet.arbitrum.io/rpc',
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
-    devnetL2: {
-      url: 'https://devnet-l2.arbitrum.io/rpc',
-      accounts: process.env['DEVNET_PRIVKEY']
-        ? [process.env['DEVNET_PRIVKEY']]
-        : [],
-    },
+    moonbase: {
+      url: process.env['MOONBASE_NETWORK'],
+      accounts: [process.env['MOONBASE_PRIVATE_KEY']],
+      chainId: 1287,
+      timeout: 1000000,
+    },   
     arbitrum: {
       url: 'http://127.0.0.1:8547',
       // url: 'https://kovan3.arbitrum.io/rpc',
@@ -161,33 +145,6 @@ const config = {
       },
     },
   },
-}
-
-if (process.env['RINKEBY_URL'] && process.env['RINKEBY_MNEMONIC']) {
-  ;(config.networks as any)['rinkeby'] = {
-    url: process.env['RINKEBY_URL'] || '',
-    accounts: [process.env['RINKEBY_MNEMONIC'] || ''],
-    network_id: 4,
-    confirmations: 1,
-  }
-}
-
-if (process.env['ROPSTEN_URL'] && process.env['ROPSTEN_MNEMONIC']) {
-  ;(config.networks as any)['ropsten'] = {
-    url: process.env['ROPSTEN_URL'] || '',
-    accounts: [process.env['ROPSTEN_MNEMONIC'] || ''],
-    network_id: 3,
-    confirmations: 1,
-  }
-}
-
-if (process.env['KOVAN_URL'] && process.env['KOVAN_MNEMONIC']) {
-  ;(config.networks as any)['kovan'] = {
-    url: process.env['KOVAN_URL'] || '',
-    accounts: [process.env['KOVAN_MNEMONIC'] || ''],
-    network_id: 42,
-    confirmations: 4,
-  }
 }
 
 module.exports = config

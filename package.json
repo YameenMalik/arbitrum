@@ -33,7 +33,14 @@
     "demo:initialize": "yarn workspace tools demo:initialize",
     "demo:deploy": "./scripts/arb_deploy.py local",
     "prod:initialize": "yarn workspace tools prod:initialize",
-    "deploy:validators": "./scripts/arb_deploy.py"
+    "deploy:validators": "./scripts/arb_deploy.py",
+
+
+    "deploy:eth_bridge": "yarn workspace arb-bridge-eth deploy:contracts",
+    "rollup:initialize": "yarn workspace tools rollup:initialize",
+    "enable:fee": "yarn workspace tools enable:fee",
+    "fundL2Wallet": "yarn workspace tools fundL2Wallet"
+
   },
   "engines": {
     "node": ">= 8.0.0",
@@ -58,7 +65,8 @@
     "eslint-plugin-mocha": "^7.0.1",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.0.5",
-    "prettier-plugin-solidity": "^1.0.0-alpha.54"
+    "prettier-plugin-solidity": "^1.0.0-alpha.54",
+    "find-up": "^5.0.0"
   },
   "resolutions": {
     "arb-provider-ethers/ethers": "~4.0.47",
