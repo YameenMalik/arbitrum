@@ -142,7 +142,13 @@ const config = {
       accounts: [process.env['MOONBASE_PRIVATE_KEY']],
       chainId: 1287,
       timeout: 1000000,
-    },      
+    }, 
+    moonbase_local: {
+      url: process.env['MOONBASE_LOCAL_NETWORK'],
+      accounts: [process.env['MOONBASE_LOCAL_PRIVATE_KEY']],
+      chainId: 1287,
+      timeout: 1000000,
+    },     
     edgeware: {
       url: process.env['EDGEWARE_NETWORK'],
       accounts: [process.env['EDGEWARE_PRIVATE_KEY']],
