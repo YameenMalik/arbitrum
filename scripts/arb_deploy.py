@@ -18,6 +18,7 @@
 # arb-deploy
 # ----------------------------------------------------------------------------
 
+from dotenv import dotenv_values
 import argparse
 import os
 import sys
@@ -25,6 +26,8 @@ import json
 
 import build_node_docker
 from support.run import run
+
+l1_chain = dotenv_values(".env")['DEPLOY_ON']
 
 # package configuration
 NAME = "arb-deploy"
@@ -214,8 +217,6 @@ def main():
     run("./scripts/create-network")
 
     parser = argparse.ArgumentParser(prog=NAME, description=DESCRIPTION)
-    # Required
-    parser.add_argument("rollup", type=str, help="The address of the rollup chain.")
 
     parser.add_argument("-p", "--password", help="Password protecting validator keys.")
     # Optional
@@ -241,7 +242,7 @@ def main():
     args = parser.parse_args()
 
     # Deploy
-    deploy(args.sudo, args.build, args.up, args.rollup, args.password)
+    deploy(args.sudo, args.build, args.up, l1_chain, args.password)
 
 
 if __name__ == "__main__":
