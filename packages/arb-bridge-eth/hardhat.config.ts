@@ -131,6 +131,13 @@ const config = {
       //   interval: 1000,
       // },
     },
+    moonbase: {
+      url: process.env['MOONBASE_NETWORK'],
+      accounts: [process.env['MOONBASE_PRIVATE_KEY']],
+      gasLimit: 20000000,
+      chainId: 1287,
+      timeout: 1000000,
+    },
     local_development: {
       url: process.env['LOCAL_NETWORK'],
       accounts: [process.env['LOCAL_PRIVATE_KEY']]
