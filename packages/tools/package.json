@@ -8,7 +8,9 @@
     "demo:initialize": "ts-node ./scripts/setup_validators_demo.ts init",
     "custom:initialize": "ts-node ./scripts/setup_validators_custom.ts init",
     "prod:initialize": "ts-node ./scripts/setup_validators.ts init",
-    "arbos:upgrade": "ts-node ./scripts/update-arbos.ts init"
+    "arbos:upgrade": "ts-node ./scripts/update-arbos.ts init",
+    "enable:fee": "ts-node ./scripts/enableFee.ts",
+    "fundL2Wallet": "ts-node ./scripts/fundL2Wallet.ts"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",

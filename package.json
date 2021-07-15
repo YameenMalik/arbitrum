@@ -38,7 +38,9 @@
 
     "deploy": "yarn workspace arb-bridge-eth deploy:contracts",
     "initialize": "yarn workspace tools custom:initialize",
-    "start": "./scripts/arb_deploy.py"
+    "start": "./scripts/arb_deploy.py",
+    "enable:fee": "yarn workspace tools enable:fee",
+    "fundL2Wallet": "yarn workspace tools fundL2Wallet"
   },
   "engines": {
     "node": ">= 8.0.0",
